@@ -74,6 +74,18 @@ function renderPlants(plantsData) {
       `;
     }).join('');
 
+    // Budujemy etykiety osi X (godziny:minuty) - co druga etykieta dla lepszej czytelności
+    const xLabels = history.map((item, index) => {
+      if (index % 2 !== 0) return '<div class="x-label"></div>'; // pusty dla co drugiego wpisu
+      const timestamp = (typeof item === 'object' && item.t !== undefined) ? item.t : null;
+      if (!timestamp) return '<div class="x-label"></div>';
+      const d = new Date(timestamp);
+      if (isNaN(d.getTime())) return '<div class="x-label"></div>';
+      const hours = padChart(d.getHours());
+      const mins = padChart(d.getMinutes());
+      return `<div class="x-label">${hours}:${mins}</div>`;
+    }).join('');
+
     // Formatowanie timestampu do pól „Ostatnie podlewanie” / „Ostatni pomiar” (pełniejsza forma)
     function formatTimestampFull(ts) {
       if (!ts) return '-';
@@ -134,8 +146,18 @@ function renderPlants(plantsData) {
 
       <div class="chart-container">
         <div class="chart-title">Historia wilgotności (ostatnie ${history.length} pomiarów)</div>
-        <div class="chart">
-          ${chartBars}
+        <div class="chart-wrapper">
+          <div class="y-axis">
+            <div class="y-label">100%</div>
+            <div class="y-label">50%</div>
+            <div class="y-label">0%</div>
+          </div>
+          <div class="chart">
+            ${chartBars}
+          </div>
+        </div>
+        <div class="x-axis">
+          ${xLabels}
         </div>
       </div>
     `;
@@ -179,7 +201,7 @@ function describeLight(value) {
   if (v <= 20) return { label: 'Ciemno', level: v };
   if (v <= 250) return { label: 'Półmrok', level: v };
   if (v <= 700) return { label: 'Sztuczne światło', level: v };
-  return { label: 'Jasno', level: v };
+  return { label: 'Światło dzienne', level: v };
 }
 
 
