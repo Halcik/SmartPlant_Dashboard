@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Podlewania Roślin</title>
+
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <header class="header">
+      <h1 id="main-title">System Podlewania Roślin</h1>
+      <p>Monitoring w czasie rzeczywistym</p>
+    </header>
+
+    <div class="environmental-grid">
+      <div class="env-card">
+        <div class="env-card-header">
+          <div class="env-icon">🌡️</div>
+          <div class="env-label" id="temperature-label">Temperatura</div>
+        </div>
+        <div>
+          <span class="env-value" id="temperature">-</span>
+          <span class="env-unit">°C</span>
+        </div>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-header">
+          <div class="env-icon">💧</div>
+          <div class="env-label" id="humidity-label">Wilgotność</div>
+        </div>
+        <div>
+          <span class="env-value" id="humidity">-</span>
+          <span class="env-unit">%</span>
+        </div>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-header">
+          <div class="env-icon">☀️</div>
+          <div class="env-label" id="light-label">Jasność</div>
+        </div>
+        <div>
+          <span class="env-value" id="light">-</span>
+        </div>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-header">
+          <div class="env-icon">🚰</div>
+          <div class="env-label" id="water-label">Poziom Wody</div>
+        </div>
+        <div>
+          <span class="water-status water-ok" id="water-status">-</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="plants-section">
+      <h2 class="section-title">Monitorowane Rośliny</h2>
+      <div class="plants-grid" id="plants-grid"></div>
+    </section>
+  </div>
+
+  <script src="/static/main.js"></script>
+</body>
+
+</html>
